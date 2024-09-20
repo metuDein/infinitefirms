@@ -15,10 +15,9 @@ export const metadata = {
   description:
     "Join the future of finance with our trusted crypto trading and mining investment platform.",
   alternates: {
-    canonical: "hhtps://infinitefirms.pro",
+    canonical: "https://infinitefirms.pro",
     languages: {
       "en-US": "/en-US",
-      "de-DE": "/de-DE",
     },
   },
   openGraph: {
