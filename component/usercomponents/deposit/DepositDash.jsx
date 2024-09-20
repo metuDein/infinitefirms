@@ -1,5 +1,9 @@
 "use client";
-import { IconDeviceAnalytics, IconChartAreaLine } from "@tabler/icons-react";
+import {
+  IconDeviceAnalytics,
+  IconChartAreaLine,
+  IconMoneybag,
+} from "@tabler/icons-react";
 import Link from "next/link";
 
 import { useDataContext } from "@component/context/DataProvider";
@@ -40,6 +44,15 @@ const DepositDash = () => {
           <IconChartAreaLine className="text-xl text-white mx-auto w-[200px] " />
           <p className="text-xl font-semibold text-center text-white">
             Mining Deposit
+          </p>
+        </Link>
+        <Link
+          href={"/user/profile/deposit/balancedeposit"}
+          className="p-2 border rounded border-gray-200 bg-black w-[150px] min-h-[400px] pt-10 pb-10"
+        >
+          <IconMoneybag className="text-xl text-white mx-auto w-[200px] " />
+          <p className="text-xl font-semibold text-center text-white">
+            Balance Deposit
           </p>
         </Link>
       </div>
