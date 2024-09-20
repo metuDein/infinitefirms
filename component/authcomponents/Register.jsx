@@ -77,7 +77,7 @@ export function Register() {
         }}
       >
         <Image
-          src={"/assets/logo/horizon.png"}
+          src={"/assets/logo/logo.png"}
           alt="logo"
           width={80}
           height={80}
