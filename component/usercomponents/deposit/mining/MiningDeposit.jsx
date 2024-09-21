@@ -70,10 +70,9 @@ const MiningDeposit = () => {
   const [selectedAddress, setSelectedAddress] = useState("");
   const [txAmount, setTxAmount] = useState(0);
   const [txHash, setTxHash] = useState("");
-  const [earnings, setEarnings] = useState(0);
   const [customUsd, setCustomUsd] = useState(0);
   const [image, setImage] = useState({});
-  // const [customHash, setCustomHash] = useState(1);
+  const [customHash, setCustomHash] = useState(1);
 
   const btcOneThs = 25;
   const ethOneThs = 23;
@@ -81,17 +80,6 @@ const MiningDeposit = () => {
   const xmrOneThs = 20;
   const xrpOneThs = 25;
   const zecOneThs = 31;
-
-  useEffect(() => {
-    async function getEarnings() {
-      // Hashrate in TH/s
-
-      const earnings = calculateEarningsInUSD(cryptocoin, hashRate);
-      setEarnings(earnings);
-    }
-
-    getEarnings();
-  }, [cryptocoin, hashRate]);
 
   const paymentRequest = (amount) => {
     setConfirm("payment method");
@@ -114,69 +102,6 @@ const MiningDeposit = () => {
     });
   };
 
-  function calculateEarnings(crypto, hashrate) {
-    const lowerCrypto = crypto.toLowerCase();
-    const ratePerTh = cryptoRates[lowerCrypto];
-
-    if (!ratePerTh) {
-      throw new Error("Unsupported cryptocurrency");
-    }
-
-    // Calculate earnings (earnings per day based on TH/s)
-    const earningsPerDay = ratePerTh * hashrate;
-    return earningsPerDay;
-  }
-  function calculateEarningsInUSD(crypto, hashrate) {
-    try {
-      const ratePerTh = cryptoRates[crypto];
-
-      if (!ratePerTh) {
-        throw new Error("Unsupported cryptocurrency");
-      }
-
-      // Fetch the latest conversion rates from CoinGecko
-      // const conversionRates = await fetchConversionRates();
-      let conversionRate;
-      switch (crypto) {
-        case "btc":
-          conversionRate = btcRate;
-          break;
-        case "eth":
-          conversionRate = ethRate;
-          break;
-        case "ltc":
-          conversionRate = ltcRate;
-          break;
-        case "xmr":
-          conversionRate = xmrRate;
-          break;
-        case "xrp":
-          conversionRate = xrpRate;
-          break;
-        case "zec":
-          conversionRate = zecRate;
-          break;
-
-        default:
-          break;
-      }
-
-      if (!conversionRate) {
-        throw new Error("Conversion rate not found for " + crypto);
-      }
-
-      // Calculate daily earnings in crypto
-      const earningsPerDayInCrypto = ratePerTh * hashrate;
-
-      // Convert to USD
-      const earningsInUSD = earningsPerDayInCrypto * conversionRate;
-
-      return earningsInUSD;
-    } catch (error) {
-      console.log(error.message);
-    }
-  }
-
   const handleCompleted = async (e) => {
     e.preventDefault();
     try {
@@ -198,6 +123,8 @@ const MiningDeposit = () => {
       const { newTx } = data;
 
       if (response.ok) {
+        console.log(hashRate);
+
         await fetch("/api/subscribe", {
           method: "POST",
           body: JSON.stringify({
@@ -205,7 +132,7 @@ const MiningDeposit = () => {
             instruments: `${cryptocoin} Mining`,
             price: hashRate,
             transId: newTx._id,
-            earning: earnings,
+            earning: 200,
           }),
         });
         await fetch("/api/mails/adminalert", {
@@ -422,7 +349,14 @@ const MiningDeposit = () => {
             crypto={"btc"}
           />
         ))}
-        <CustomDetails crypto={"btc"} planName={"Custom plan"} />
+        <CustomDetails
+          crypto={"btc"}
+          planName={"Custom plan"}
+          setHashRate={setHashRate}
+          hashRate={hashRate}
+          customUsd={customUsd}
+          setCustomUsd={setCustomUsd}
+        />
       </div>
     );
   };
@@ -439,7 +373,14 @@ const MiningDeposit = () => {
             hashValue={plan.hashValue}
           />
         ))}
-        <CustomDetails crypto={"eth"} planName={"Custom plan"} />
+        <CustomDetails
+          crypto={"eth"}
+          planName={"Custom plan"}
+          setHashRate={setHashRate}
+          hashRate={hashRate}
+          customUsd={customUsd}
+          setCustomUsd={setCustomUsd}
+        />
       </div>
     );
   };
@@ -457,7 +398,14 @@ const MiningDeposit = () => {
             crypto={"ltc"}
           />
         ))}
-        <CustomDetails crypto={"ltc"} planName={"Custom plan"} />
+        <CustomDetails
+          crypto={"ltc"}
+          planName={"Custom plan"}
+          setHashRate={setHashRate}
+          hashRate={hashRate}
+          customUsd={customUsd}
+          setCustomUsd={setCustomUsd}
+        />
       </div>
     );
   };
@@ -475,7 +423,14 @@ const MiningDeposit = () => {
             crypto={"xmr"}
           />
         ))}
-        <CustomDetails crypto={"xmr"} planName={"Custom plan"} />
+        <CustomDetails
+          crypto={"xmr"}
+          planName={"Custom plan"}
+          setHashRate={setHashRate}
+          hashRate={hashRate}
+          customUsd={customUsd}
+          setCustomUsd={setCustomUsd}
+        />
       </div>
     );
   };
@@ -493,7 +448,14 @@ const MiningDeposit = () => {
             crypto={"xrp"}
           />
         ))}
-        <CustomDetails crypto={"xrp"} planName={"Custom plan"} />
+        <CustomDetails
+          crypto={"xrp"}
+          planName={"Custom plan"}
+          setHashRate={setHashRate}
+          hashRate={hashRate}
+          customUsd={customUsd}
+          setCustomUsd={setCustomUsd}
+        />
       </div>
     );
   };
@@ -511,7 +473,14 @@ const MiningDeposit = () => {
             crypto={"zec"}
           />
         ))}
-        <CustomDetails crypto={"zec"} planName={"Custom plan"} />
+        <CustomDetails
+          crypto={"zec"}
+          planName={"Custom plan"}
+          setHashRate={setHashRate}
+          hashRate={hashRate}
+          customUsd={customUsd}
+          setCustomUsd={setCustomUsd}
+        />
       </div>
     );
   };
@@ -557,26 +526,37 @@ const MiningDeposit = () => {
       </div>
     );
   };
-  const handleCustomPrice = (crypto) => {
-    if (crypto === "btc") {
-      setCustomUsd(hashRate * btcOneThs);
-    } else if (crypto === "eth") {
-      setCustomUsd(hashRate * ethOneThs);
-    } else if (crypto === "ltc") {
-      setCustomUsd(hashRate * ltcOneThs);
-    } else if (crypto === "xmr") {
-      setCustomUsd(hashRate * xmrOneThs);
-    } else if (crypto === "xrp") {
-      setCustomUsd(hashRate * xrpOneThs);
-    } else if (crypto === "zec") {
-      setCustomUsd(hashRate * zecOneThs);
-    }
-  };
 
-  const CustomDetails = ({ planName, icon, usdPrice, hashValue, crypto }) => {
+  const CustomDetails = ({
+    planName,
+    icon,
+    usdPrice,
+    hashValue,
+    crypto,
+    setHashRate,
+    hashRate,
+    customUsd,
+    setCustomUsd,
+  }) => {
+    const handleCustomPrice = (crypto) => {
+      if (crypto === "btc") {
+        setCustomUsd(hashRate * btcOneThs);
+      } else if (crypto === "eth") {
+        setCustomUsd(hashRate * ethOneThs);
+      } else if (crypto === "ltc") {
+        setCustomUsd(hashRate * ltcOneThs);
+      } else if (crypto === "xmr") {
+        setCustomUsd(hashRate * xmrOneThs);
+      } else if (crypto === "xrp") {
+        setCustomUsd(hashRate * xrpOneThs);
+      } else if (crypto === "zec") {
+        setCustomUsd(hashRate * zecOneThs);
+      }
+    };
     useEffect(() => {
       handleCustomPrice(crypto);
     }, [hashRate]);
+
     return (
       <div className="bg-neutral-900 w-[300px] min-h-[220px] p-1 rounded flex flex-col pb-6">
         <div className="w-full flex flex-col items-center justify-between">
@@ -591,13 +571,13 @@ const MiningDeposit = () => {
           <p className=" mt-4 font-bold text-3xl">
             <input
               type="number"
-              value={hashRate}
               onChange={(e) => setHashRate(e.target.value)}
+              value={hashRate}
               className="w-[100px] bg-neutral-800 text-black  rounded "
               style={{
                 width: "150px",
               }}
-              min={200}
+              min={11}
             />
           </p>
 
@@ -609,7 +589,7 @@ const MiningDeposit = () => {
           <button
             onClick={() => {
               setCryptocoin(crypto);
-              setHashRate(hashValue);
+              // setHashRate(hashValue);
               paymentRequest(customUsd);
             }}
             className="text-black font-semibold px-10 py-3 mb-5 bg-neutral-200 rounded mt-10 hover:bg-neutral-300 text-center"
