@@ -1,8 +1,10 @@
 "use client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { useRouter } from "next/navigation";
 
 const PlanCard = ({ name, price, features }) => {
+  const router = useRouter();
   const planFeatures = () => {
     return features.map((feature, index) => (
       <div key={index} className="flex items-start justify-start gap-2 my-4">
@@ -25,7 +27,10 @@ const PlanCard = ({ name, price, features }) => {
           $ <span className="text-2xl font-bold"> {price} </span> /month
         </p>
 
-        <button className="w-full rounded bg-blue-600 text-white shadow-md text-center font-serif p-4">
+        <button
+          onClick={() => router.push("/user/profile/deposit")}
+          className="w-full rounded bg-blue-600 text-white shadow-md text-center font-serif p-4"
+        >
           start plan
         </button>
       </div>

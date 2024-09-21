@@ -393,56 +393,6 @@ const Navbar = () => {
       <TradingViewWidget />
     </header>
   );
-
-  return (
-    <header className=" bg-black w-full fixed  z-[1000]">
-      <nav className="flex justify-between items-center shadow-md text-white max-w-5xl mx-auto">
-        <Link href={"/"} className="flex items-center">
-          <Image
-            className="w-[4rem]"
-            src="/assets/logo/logo.png"
-            alt="Logo"
-            width={60}
-            height={60}
-          />
-
-          <span className="ml-1 text-xl font-bold md:block hidden">
-            Infinite firms
-          </span>
-        </Link>
-        <ul className="flex ">
-          <li className="px-4 hover:underline">
-            <Link href="#">Home</Link>
-          </li>
-          <li className="px-4 hover:underline">
-            <Link href="#">About</Link>
-          </li>
-          <li className="px-4 hover:underline">
-            <Link href="#">Services</Link>
-          </li>
-          <li className="px-4 hover:underline">
-            <Link href="#">Contact</Link>
-          </li>
-          {session && (
-            <>
-              <li className="px-4 hover:underline">
-                <div href="/user/profile">
-                  {" "}
-                  <MultiStepLoaderDemo />{" "}
-                </div>
-              </li>
-              <li className="px-4 hover:underline">
-                <Link href="/user/profile">Profile</Link>
-              </li>
-              <li className="px-4 hover:underline ">
-                <div className="absolute"></div>
-              </li>
-            </>
-          )}
-        </ul>
-      </nav>
-    </header>
-  );
 };
 
 export default Navbar;

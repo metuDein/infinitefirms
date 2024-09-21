@@ -3,6 +3,7 @@ import {
   IconDeviceAnalytics,
   IconChartAreaLine,
   IconMoneybag,
+  IconWallet,
 } from "@tabler/icons-react";
 import Link from "next/link";
 
@@ -50,7 +51,7 @@ const DepositDash = () => {
           href={"/user/profile/deposit/balancedeposit"}
           className="p-2 border rounded border-gray-200 bg-black w-[150px] min-h-[400px] pt-10 pb-10"
         >
-          <IconMoneybag className="text-xl text-white mx-auto w-[200px] " />
+          <IconWallet className="text-xl text-white mx-auto w-[200px] " />
           <p className="text-xl font-semibold text-center text-white">
             Balance Deposit
           </p>

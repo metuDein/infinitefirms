@@ -8,45 +8,45 @@ import AcctType from "./AccountType";
 
 const BalanceComponent = () => {
   const { currentUser } = useDataContext();
-  const { balances, accountType } = currentUser;
-  console.log(balances);
+  // const { balances, accountType } = currentUser;
+  // console.log(balances);
   const [actType, setActType] = useState("");
-  useEffect(() => {
-    const fetchPrices = async () => {
-      try {
-        const response = await fetch("/api/getcryptoprices", {
-          method: "POST",
-          body: {
-            btc: balances?.bitcoin,
-            eth: balances?.ethereum,
-            ltc: balances?.litecoin,
-            xmr: balances?.monero,
-            xrp: balances?.ripple,
-            zec: balances?.zcash,
-          },
-        });
+  // useEffect(() => {
+  //   const fetchPrices = async () => {
+  //     try {
+  //       const response = await fetch("/api/getcryptoprices", {
+  //         method: "POST",
+  //         body: {
+  //           btc: currentUser?.balances?.bitcoin,
+  //           eth: currentUser?.balances?.ethereum,
+  //           ltc: currentUser?.balances?.litecoin,
+  //           xmr: currentUser?.balances?.monero,
+  //           xrp: currentUser?.balances?.ripple,
+  //           zec: currentUser?.balances?.zcash,
+  //         },
+  //       });
 
-        const data = await response.json();
+  //       const data = await response.json();
 
-        console.log(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  //       console.log(data);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
 
-    acType();
-    fetchPrices();
-  }, [balances]);
+  //   acType();
+  //   fetchPrices();
+  // }, [balances]);
 
   const acType = () => {
-    switch (accountType) {
-      case accountType?.gold:
+    switch (currentUser?.accountType) {
+      case currentUser?.accountType?.gold:
         return setActType("Gold");
-      case accountType?.silver:
+      case currentUser?.accountType?.silver:
         return setActType("Silver");
-      case accountType?.bronze:
+      case currentUser?.accountType?.bronze:
         return setActType("Bronze");
-      case accountType?.starter:
+      case currentUser?.accountType?.starter:
         return setActType("Starter");
 
       default:
