@@ -46,26 +46,44 @@ const TradersDash = () => {
       return;
     }
     try {
-      const response = await fetch("/api/copytrader", {
+      const response = await fetch("/api/deposits", {
         method: "POST",
         body: JSON.stringify({
           userId: currentUser._id,
-          traderId: traderId,
+          txType: "copy trading deposit",
+          amount: 10000,
+          address: cardInfo?.traderName,
+          txhash: cardInfo?.traderEmail,
+          image: currentUser?.image || {},
         }),
       });
+
+      const data = await response.json();
+      console.log(data);
+
+      const { newTx } = data;
       if (response.ok) {
-        await fetch("/api/subscribe", {
+        const response = await fetch("/api/copytrader", {
           method: "POST",
           body: JSON.stringify({
-            userId: currentUser?._id,
-            instruments: `copy Trading`,
-            price: "",
-            transId: "copy trading",
-            earning: 50,
-            status: "active",
+            userId: currentUser._id,
+            traderId: traderId,
           }),
         });
-        toast.success("Trader copied successfully");
+        if (response.ok) {
+          await fetch("/api/subscribe", {
+            method: "POST",
+            body: JSON.stringify({
+              userId: currentUser?._id,
+              instruments: `copy Trading`,
+              price: currentUser?.balances?.deposit,
+              transId: newTx?._id,
+              earning: 50,
+              status: "active",
+            }),
+          });
+          toast.success("Trader copied successfully");
+        }
       }
     } catch (error) {
       toast.error(`${error.message}`);
