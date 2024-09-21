@@ -11,6 +11,10 @@ const copytradingSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Trader'
     },
+    transId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Transactions'
+    }
 })
 
 

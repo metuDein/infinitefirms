@@ -17,8 +17,8 @@ export const GET = async () => {
 export const POST = async (req) => {
     await dbConn()
     try {
-        const { userId, traderId } = await req.json()
-        const newCopyTrading = await Copytrading.create({ userId, traderId })
+        const { userId, traderId, transId } = await req.json()
+        const newCopyTrading = await Copytrading.create({ userId, traderId, transId })
         return NextResponse.json({ newCopyTrading }, { status: 201 })
     } catch (error) {
         console.error(error)

@@ -11,7 +11,7 @@ export const GET = async () => {
         return NextResponse.json({ subscriptions }, { status: 200 })
 
     } catch (error) {
-        console.error(error)
+        console.error(`${error.name} : ${error.message}`)
         return NextResponse.json({ message: 'Failed to fetch subscriptions' }, { status: 500 })
     }
 }
@@ -25,7 +25,7 @@ export const POST = async (req) => {
         await subscription.save()
         return NextResponse.json({ message: 'subscription created successfully', subscription }, { status: 201 })
     } catch (error) {
-        console.error(error)
+        console.error(`${error.name} : ${error.message}`)
         return NextResponse.json({ message: 'Failed to create subscription' }, { status: 500 })
     }
 }
@@ -33,15 +33,15 @@ export const POST = async (req) => {
 export const PATCH = async (req) => {
     await dbConn()
     try {
-        const { transId, status, earning } = await req.json()
+        const { id, status, earning } = await req.json()
 
-        const subscription = await Subscription.findOne({ transId }).exec()
+        const subscription = await Subscription.findOne({ transId: id }).exec()
         if (status) subscription.status = status
         if (earning) subscription.earning = earning
         await subscription.save()
         return NextResponse.json({ message: 'subscription updated successfully' }, { status: 200 })
     } catch (error) {
-        console.error(error)
+        console.error(`${error.name} : ${error.message}`)
         return NextResponse.json({ message: 'Failed to update subscription' }, { status: 500 })
     }
 }

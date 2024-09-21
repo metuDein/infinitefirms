@@ -82,7 +82,7 @@ export const DataProvider = ({ children }) => {
     try {
       const response = await fetch("/api/subscribe");
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       if (response.ok) {
         setAllSubscription(data.subscriptions || []);
       }
@@ -107,6 +107,7 @@ export const DataProvider = ({ children }) => {
       const data = await response.json();
       if (response.ok) {
         setAllCopiers(data.copyTradings || []);
+        // console.log(data);
       }
     } catch (error) {
       console.error(error.message);
@@ -116,7 +117,7 @@ export const DataProvider = ({ children }) => {
     try {
       const response = await fetch("/api/kyc");
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
 
       if (response.ok) {
         setKycs(data.kycs || []);
@@ -185,6 +186,7 @@ export const DataProvider = ({ children }) => {
         xrpRate,
         zecRate,
         getUser,
+        getCopiers,
         testimonials,
         setKeepAlert,
         keepAlert,

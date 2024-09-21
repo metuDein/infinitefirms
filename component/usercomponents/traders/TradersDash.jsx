@@ -7,10 +7,10 @@ import Image from "next/image";
 import { IconArrowBigUpLines, IconArrowBigUp } from "@tabler/icons-react";
 import StarRating from "@component/usercomponents/profile/components/StarRating";
 import CountryFlag from "@component/admincomponents/components/CountryFlag";
-
 import { toast } from "react-toastify";
+
 const TradersDash = () => {
-  const { currentUser, allTransactions, allTraders, allCopiers } =
+  const { currentUser, allTransactions, allTraders, allCopiers, getCopiers } =
     useDataContext();
   const [cardInfo, setCardInfo] = useState(null);
   const [copyCardInfo, setCopyCardInfo] = useState(null);
@@ -68,6 +68,7 @@ const TradersDash = () => {
           body: JSON.stringify({
             userId: currentUser._id,
             traderId: traderId,
+            transId: newTx?._id,
           }),
         });
         if (response.ok) {
@@ -82,6 +83,7 @@ const TradersDash = () => {
               status: "active",
             }),
           });
+          await getCopiers();
           toast.success("Trader copied successfully");
         }
       }
@@ -90,7 +92,7 @@ const TradersDash = () => {
     }
   };
 
-  const handleStopTrader = async (id) => {
+  const handleStopTrader = async (id, transId) => {
     try {
       const response = await fetch("/api/copytrader", {
         method: "DELETE",
@@ -102,7 +104,7 @@ const TradersDash = () => {
         await fetch("/api/subscribe", {
           method: "PATCH",
           body: JSON.stringify({
-            transId: "copy trading",
+            id: transId,
             status: "inactive",
           }),
         });
@@ -142,7 +144,7 @@ const TradersDash = () => {
                     </div>
                   </div>
                   <button
-                    onClick={() => handleStopTrader(item._id)}
+                    onClick={() => handleStopTrader(item?._id, item?.transId)}
                     className="p-2 bg-black text-white rounded hidden md:block"
                     style={{ padding: "5px 20px", background: "#dc2626" }}
                   >
