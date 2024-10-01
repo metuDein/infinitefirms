@@ -16,15 +16,13 @@ const Withdrawal = () => {
     zecRate,
   } = useDataContext();
 
-  const { balances } = currentUser;
-  const { bitcoin, ethereum, litecoin, monero, ripple, zcash } = balances;
   const totalCryptoBalance =
-    bitcoin * btcRate +
-    ethereum * ethRate +
-    litecoin * ltcRate +
-    monero * xmrRate +
-    ripple * xrpRate +
-    zcash * zecRate;
+    currentUser?.balances.bitcoin * btcRate +
+    currentUser?.balances.ethereum * ethRate +
+    currentUser?.balances.litecoin * ltcRate +
+    currentUser?.balances.monero * xmrRate +
+    currentUser?.balances.ripple * xrpRate +
+    currentUser?.balances.zcash * zecRate;
 
   const [mining, setMining] = useState(totalCryptoBalance);
   const [key, setKey] = useState("Bitcoin");
@@ -44,8 +42,24 @@ const Withdrawal = () => {
 
   const withdrawTx = tx.filter((item) => item.transtype.includes("withdraw"));
 
+  const handleWithdrawalbal = (e) => {
+    setWithdrawaBal(e.target.value);
+  };
+
   const handleWithdrawal = async (e) => {
     e.preventDefault();
+    if (withdrawBal === "trading" && amount > currentUser?.balances?.trading) {
+      toast.error("Insufficient balance", {
+        position: "top-center",
+      });
+      return;
+    }
+    if (withdrawBal === "mining" && amount > totalCryptoBalance) {
+      toast.error("Insufficient balance", {
+        position: "top-center",
+      });
+      return;
+    }
 
     switch (key) {
       case "Bitcoin":
@@ -336,19 +350,14 @@ const Withdrawal = () => {
                 name="from"
                 id="from"
                 className="w-full p-2 rounded "
-                onChange={(e) => setWithdrawaBal(e.target.value)}
+                onChange={handleWithdrawalbal}
               >
-                <option
-                  value={`Profit ${currentUser?.balances.profit}`}
-                  key="1"
-                >
-                  Trading Profit (${currentUser?.balances.profit})
+                <option> --- select balance ---</option>
+                <option value={`trading`} key="1">
+                  Trading Profit (${currentUser?.balances.trading})
                 </option>
-                <option
-                  value={`bitcoin ${currentUser?.balances.mining}`}
-                  key="2"
-                >
-                  Mining Profit $({mining.toFixed(2)})
+                <option value={`mining`} key="2">
+                  Mining Profit $({totalCryptoBalance.toFixed(2)})
                 </option>
               </select>
             </div>
