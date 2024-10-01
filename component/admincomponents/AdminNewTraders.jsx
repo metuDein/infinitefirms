@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import CountrySelect from "@component/authcomponents/components/CountrySelect";
 import Image from "next/image";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const AdminNewTraders = () => {
   const [fullname, setFullname] = useState("");
@@ -21,6 +23,7 @@ const AdminNewTraders = () => {
   const [copiers, setCopiers] = useState(100);
   const [joined, setJoined] = useState(2019);
   const [desc, setDesc] = useState("");
+  const [loading, setLoading] = useState(false);
 
   // functions
   const handleCheckboxChange = (e, selectedOption) => {
@@ -45,6 +48,7 @@ const AdminNewTraders = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const response = await fetch("/api/admin/traders", {
         method: "POST",
         body: JSON.stringify({
@@ -81,6 +85,8 @@ const AdminNewTraders = () => {
       setJoined(2019);
     } catch (error) {
       toast.error(error.message);
+    } finally {
+      setLoading(false);
     }
   };
   const uploadImage = async (e) => {
@@ -396,17 +402,32 @@ const AdminNewTraders = () => {
                 onChange={(e) => setDesc(e.target.value)}
               />
             </div>
-            <button
-              className="bg-gray-100 text-black w-1/2 mx-auto mt-4 "
-              style={{
-                padding: "10px",
-                marginLeft: "auto",
-                marginRight: "auto",
-                borderRadius: "10px",
-              }}
-            >
-              Save
-            </button>
+            {!loading && (
+              <button
+                className="bg-gray-100 text-black w-1/2 mx-auto mt-4 "
+                style={{
+                  padding: "10px",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  borderRadius: "10px",
+                }}
+              >
+                Save
+              </button>
+            )}
+            {loading && (
+              <article
+                className="bg-gray-100 text-center text-black w-1/2 mx-auto mt-4 "
+                style={{
+                  padding: "10px",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  borderRadius: "10px",
+                }}
+              >
+                <FontAwesomeIcon icon={faSpinner} spin />
+              </article>
+            )}
           </div>
         </form>
       </div>

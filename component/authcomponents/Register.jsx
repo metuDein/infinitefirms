@@ -4,11 +4,8 @@ import React from "react";
 import { Label } from "@components/ui/label";
 import { Input } from "@components/ui/input";
 import { cn } from "@/lib/utils";
-import {
-  IconBrandGithub,
-  IconBrandGoogle,
-  IconBrandOnlyfans,
-} from "@tabler/icons-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -24,12 +21,14 @@ export function Register() {
   const [password, setPassword] = useState("");
   const [selectedCountry, setSelectedCountry] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Form submitted");
 
     try {
+      setLoading(true);
       const response = await fetch("/api/auth/register", {
         method: "POST",
         body: JSON.stringify({
@@ -62,6 +61,8 @@ export function Register() {
       toast.error(error.message, {
         position: "top-center",
       });
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -166,13 +167,28 @@ export function Register() {
           />
         </LabelInputContainer>
 
-        <button
-          className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
-          type="submit"
-        >
-          Sign up &rarr;
-          <BottomGradient />
-        </button>
+        {!loading && (
+          <button
+            className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
+            type="submit"
+          >
+            sign up &rarr;
+            <BottomGradient />
+          </button>
+        )}
+        {loading && (
+          <article
+            className=" text-center bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
+            type="submit"
+          >
+            <FontAwesomeIcon
+              icon={faSpinner}
+              spin
+              className="mx-auto text-center"
+            />
+            <BottomGradient />
+          </article>
+        )}
         <div className="mt-2 float-right text-left">
           <Link
             href={"/user-login"}

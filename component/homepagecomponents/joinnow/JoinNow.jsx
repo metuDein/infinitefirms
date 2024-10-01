@@ -1,8 +1,11 @@
+"use client";
 import React from "react";
 import { FlipWords } from "@components/ui/flip-words";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const JoinNow = () => {
+  const router = useRouter();
   const words = ["secure", "profitable", "smart", "innovative"];
 
   return (
@@ -17,7 +20,10 @@ const JoinNow = () => {
         <FlipWords words={words} />
         pathways to freedom.
         <div className="mt-8">
-          <button className="shadow-[inset_0_0_0_2px_#616467] text-black px-6 py-2 rounded-full tracking-widest uppercase font-semibold bg-transparent hover:bg-[#616467] hover:text-white dark:text-neutral-800 transition duration-200 text-center">
+          <button
+            onClick={() => router.push("/user-register")}
+            className="shadow-[inset_0_0_0_2px_#616467] text-black px-6 py-2 rounded-full tracking-widest uppercase font-semibold bg-transparent hover:bg-[#616467] hover:text-white dark:text-neutral-800 transition duration-200 text-center"
+          >
             Join now
           </button>
         </div>

@@ -5,6 +5,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { ExpandableCardDemo } from "./components/tradercomponent/TraderInfo";
 import CountrySelect from "@component/authcomponents/components/CountrySelect";
+import Image from "next/image";
 
 const AdminViewTrader = ({ params }) => {
   const { allUsers, allTraders } = useDataContext();
@@ -12,6 +13,7 @@ const AdminViewTrader = ({ params }) => {
 
   //states
   const [email, setEmail] = useState(trader?.traderEmail);
+  const [image, setImage] = useState(trader?.image);
   const [fullname, setFullname] = useState(trader?.traderName);
   const [selectedCountry, setSelectedCountry] = useState(
     trader?.traderLocation
@@ -86,7 +88,7 @@ const AdminViewTrader = ({ params }) => {
       const response = await fetch(`/api/admin/traders`, {
         method: "DELETE",
         body: JSON.stringify({
-          userId: params.id,
+          id: params.id,
         }),
       });
       if (response.ok) {
@@ -149,32 +151,51 @@ const AdminViewTrader = ({ params }) => {
                 }}
               >
                 <label htmlFor="userImage">
-                  <span
-                    className=" rounded-full block mx-auto"
-                    style={{
-                      width: "200px",
-                      height: "200px",
-                      borderRadius: "50%",
-                      backgroundImage: `url(https://png.pngtree.com/png-vector/20210604/ourmid/pngtree-gray-avatar-placeholder-png-image_3416697.jpg)`,
-                      backgroundSize: "contain",
-                      backgroundPosition: "",
-                      borderRadius: "50%",
-                      position: "relative",
-                      // background: "rgba(0, 0, 0, 0.6)",
-                      cursor: "pointer",
-
-                      breakAfter: {
-                        content: "",
+                  {!image?.secure_url && (
+                    <span
+                      className=" rounded-full block mx-auto"
+                      style={{
                         width: "200px",
                         height: "200px",
-                        background: "rgba(0,0,0,0.6)",
-                        position: "absolute",
-                        top: "0",
-                        left: "0",
-                        zIndex: "100",
-                      },
-                    }}
-                  ></span>
+                        borderRadius: "50%",
+                        backgroundImage: `url(https://png.pngtree.com/png-vector/20210604/ourmid/pngtree-gray-avatar-placeholder-png-image_3416697.jpg)`,
+                        backgroundSize: "contain",
+                        backgroundPosition: "",
+                        borderRadius: "50%",
+                        position: "relative",
+                        // background: "rgba(0, 0, 0, 0.6)",
+                        cursor: "pointer",
+
+                        breakAfter: {
+                          content: "",
+                          width: "200px",
+                          height: "200px",
+                          background: "rgba(0,0,0,0.6)",
+                          position: "absolute",
+                          top: "0",
+                          left: "0",
+                          zIndex: "100",
+                        },
+                      }}
+                    ></span>
+                  )}
+                  {image?.secure_url && (
+                    <Image
+                      alt="User Avatar"
+                      src={image?.secure_url}
+                      width={400}
+                      height={400}
+                      className="mx-auto"
+                      style={{
+                        width: "150px",
+                        height: "150px",
+                        borderRadius: "50%",
+                        objectFit: "cover",
+                        // background: "rgba(0, 0, 0, 0.6)",
+                        cursor: "pointer",
+                      }}
+                    />
+                  )}
                 </label>
 
                 <div className="flex flex-col">

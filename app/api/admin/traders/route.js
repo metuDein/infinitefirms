@@ -39,8 +39,8 @@ export const PATCH = async (req) => {
 export const DELETE = async (req) => {
     await dbConn()
     try {
-        const { userId } = await req.json()
-        const deletedTrader = await Trader.findByIdAndDelete(userId)
+        const { id } = await req.json()
+        const deletedTrader = await Trader.findByIdAndDelete(id)
 
         if (!deletedTrader) return NextResponse.json({ message: 'Trader not found' }, { status: 404 })
 

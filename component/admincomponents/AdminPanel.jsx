@@ -124,7 +124,7 @@ const AdminPanel = () => {
     );
   };
 
-  const UsersCards = ({ email, firstname, deposit, id }) => {
+  const UsersCards = ({ email, firstname, username, deposit, id }) => {
     return (
       <div
         onClick={() => router.push(`/admin/panel/user/${id}`)}
@@ -148,6 +148,7 @@ const AdminPanel = () => {
         <div className="w-full">
           {/* <p className="text-sm font-normal text-left">{email}</p> */}
           <p className="text-sm font-normal text-center">{firstname}</p>
+          <p className="text-sm font-normal text-center">{username}</p>
           {/* <p className="text-sm font-normal">${deposit}</p> */}
         </div>
       </div>
@@ -385,6 +386,7 @@ const AdminPanel = () => {
                 firstname={user.firstname}
                 deposit={user.balances.deposit}
                 id={user._id}
+                username={user.username}
               />
             ))}
           </div>
@@ -413,6 +415,7 @@ const AdminPanel = () => {
               <div
                 className="flex items-center  p-2 rounded justify-between text-white max-w-4xl mx-auto"
                 key={id}
+                onClick={() => router.push(`/admin/panel/kyc/${item?._id}`)}
               >
                 <div className="flex items-center ">
                   <Image
@@ -425,6 +428,7 @@ const AdminPanel = () => {
                   <div className="flex flex-col p-2">
                     <p> {item?.userId?.firstname}</p>
                     <span>{item?.userId?.email}</span>
+                    <span>{item?.status}</span>
                   </div>
                 </div>
                 <Link
@@ -444,6 +448,7 @@ const AdminPanel = () => {
               <div
                 className="flex items-center  p-2 rounded justify-between text-white max-w-4xl mx-auto"
                 key={id}
+                onClick={() => router.push(`/admin/panel/subs/${item?._id}`)}
               >
                 <div className="flex items-center ">
                   <Image
@@ -456,16 +461,16 @@ const AdminPanel = () => {
                   <div className="flex flex-col p-2">
                     <p> {item?.userId?.firstname}</p>
                     <span>{item?.instruments}</span>
+                    <span>{item?.status}</span>
                   </div>
                 </div>
-                <Link
-                  href={`/admin/panel/subs/${item?._id}`}
+                <button
                   className="p-2 bg-black text-white rounded hidden md:block text-center"
                   style={{ padding: "5px 20px" }}
                 >
                   {" "}
                   view{" "}
-                </Link>
+                </button>
               </div>
             </>
           ))}

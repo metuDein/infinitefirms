@@ -25,20 +25,21 @@ export const DataProvider = ({ children }) => {
   const [xrpRate, setXrpRate] = useState(null);
   const [zecRate, setZecRate] = useState(null);
 
-  const getAllUsers = async () => {
-    try {
-      const response = await fetch("/api/auth/getusers");
-      const data = await response.json();
+  // const getAllUsers = async () => {
+  //   try {
+  //     const response = await fetch("/api/auth/getusers");
+  //     const data = await response.json();
 
-      if (response.ok) {
-        setAllUsers(data.users || []);
-      } else {
-        setAllUsers([]);
-      }
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
+  //     if (response.ok) {
+  //       setAllUsers(data.users || []);
+  //     } else {
+  //       setAllUsers([]);
+  //     }
+  //   } catch (error) {
+  //     console.error(error.message);
+  //   }
+  // };
+
   const getUser = async () => {
     try {
       const response = await fetch("/api/auth/getcurrentuser");
@@ -52,55 +53,33 @@ export const DataProvider = ({ children }) => {
       console.error(error.message);
     }
   };
-  const getTransactions = async () => {
+
+  // Data collection
+  const appData = async () => {
     try {
-      const response = await fetch("/api/deposits");
-      const data = await response.json();
-      setAllTransactions(data.tx || []);
-      const userTx = allTransactions.filter(
-        (item) => item.userId._id === currentUser._id
-      );
-      setCurrentUserTransactions(userTx);
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
-  const getTraders = async () => {
-    try {
-      const response = await fetch("/api/traders");
+      const response = await fetch("/api/datarefresh");
       const data = await response.json();
       // console.log(data);
 
       if (response.ok) {
+        setAllUsers(data.users || []);
+        setCurrentUser(data.user);
+        setAllTransactions(data.tx || []);
+        const userTx = allTransactions.filter(
+          (item) => item.userId._id === currentUser._id
+        );
+        setCurrentUserTransactions(userTx);
         setAllTraders(data.traders || []);
-      }
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
-  const getSubscriptions = async () => {
-    try {
-      const response = await fetch("/api/subscribe");
-      const data = await response.json();
-      // console.log(data);
-      if (response.ok) {
         setAllSubscription(data.subscriptions || []);
-      }
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
-  const getTestimonials = async () => {
-    try {
-      const response = await fetch("/api/testimonials");
-      const data = await response.json();
-      if (response.ok) {
         setTestimonials(data.testimonials || []);
+        setAllCopiers(data.copyTradings || []);
+        setKycs(data.kycs || []);
       }
     } catch (error) {
-      console.error(error.message);
+      console.log(`${error.name} : ${error.message}`);
     }
   };
+
   const getCopiers = async () => {
     try {
       const response = await fetch("/api/copytrader");
@@ -113,19 +92,7 @@ export const DataProvider = ({ children }) => {
       console.error(error.message);
     }
   };
-  const getKycs = async () => {
-    try {
-      const response = await fetch("/api/kyc");
-      const data = await response.json();
-      // console.log(data);
 
-      if (response.ok) {
-        setKycs(data.kycs || []);
-      }
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
   const fetchCryptoRates = async () => {
     try {
       const response = await fetch(
@@ -144,14 +111,15 @@ export const DataProvider = ({ children }) => {
     }
   };
   const getAppData = () => {
-    getUser();
-    getKycs();
-    getCopiers();
-    getTraders();
-    getAllUsers();
-    getTestimonials();
-    getTransactions();
-    getSubscriptions();
+    // getUser();
+    // getKycs();
+    // getCopiers();
+    // getTraders();
+    // getAllUsers();
+    // getTestimonials();
+    // getTransactions();
+    // getSubscriptions();
+    appData();
     fetchCryptoRates();
     setTimeout(() => {
       setAppLoading(false);

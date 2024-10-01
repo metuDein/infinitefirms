@@ -10,10 +10,8 @@ import CountryFlag from "@component/admincomponents/components/CountryFlag";
 import { toast } from "react-toastify";
 
 const TradersDash = () => {
-  const { currentUser, allTransactions, allTraders, allCopiers, getCopiers } =
-    useDataContext();
+  const { currentUser, allTraders, allCopiers, getCopiers } = useDataContext();
   const [cardInfo, setCardInfo] = useState(null);
-  const [copyCardInfo, setCopyCardInfo] = useState(null);
 
   const myTraders = allCopiers.filter(
     (item) => item.userId === currentUser?._id
@@ -108,6 +106,7 @@ const TradersDash = () => {
             status: "inactive",
           }),
         });
+        await getCopiers();
         toast.success("you have stopped copying this trader");
       }
     } catch (error) {

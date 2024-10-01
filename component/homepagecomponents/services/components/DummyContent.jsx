@@ -12,8 +12,8 @@ const DummyContent = ({ description, src, link }) => {
       <Image
         src={src || "https://assets.aceternity.com/macbook.png"}
         alt="Macbook mockup from Aceternity UI"
-        height={500}
-        width={500}
+        height="500"
+        width="500"
         className="md:w-1/2 md:h-1/2 h-full w-full mx-auto object-contain"
       />
       <Link

@@ -417,7 +417,7 @@ const BalanceDeposit = () => {
                       alt="Transaction Image"
                       width={70}
                       height={70}
-                      className="w-full h-full object-cover mx-auto"
+                      className="w-full h-full object-cover"
                     />
                   </div>
                 )}

@@ -132,7 +132,7 @@ const MiningDeposit = () => {
             instruments: `${cryptocoin} Mining`,
             price: hashRate,
             transId: newTx._id,
-            earning: 200,
+            earning: 0.03,
           }),
         });
         await fetch("/api/mails/adminalert", {

@@ -11,37 +11,33 @@ import Provider from "@component/context/Provider";
 import Footer from "@component/navbarandfooter/Footer";
 
 export const metadata = {
-  title: "Infinite firms",
+  title: "Horizonmarketcapital",
   description:
     "Join the future of finance with our trusted crypto trading and mining investment platform.",
   alternates: {
-    canonical: "https://infinitefirms.pro",
+    canonical: "https://www.horizonmarketcapital.com",
     languages: {
       "en-US": "/en-US",
     },
   },
   openGraph: {
-    images: "/assets/logo/logo.png",
-    url: "https://infinitefirms.pro",
     type: "website",
+    url: "https://www.horizonmarketcapital.com",
+    title: "Horizonmarketcapital",
+    description:
+      "Join the future of finance with our trusted crypto trading and mining investment platform.",
+    images: [
+      {
+        url: "/assets/logo/horizon.png",
+        width: 800,
+        height: 600,
+        alt: "horizon",
+      },
+    ],
   },
-  // openGraph: {
-  //   type: "website",
-  //   title: "infinitefirms",
-  //   description:
-  //     "Join the future of finance with our trusted crypto trading and mining investment platform.",
-  //   images: [
-  //     {
-  //       url: "/assets/logo/logo.png",
-  //       width: 800,
-  //       height: 600,
-  //       alt: "horizon",
-  //     },
-  //   ],
-  // },
   twitter: {
     card: "summary_large_image",
-    title: "Infinite firms",
+    title: "Horizonmarketcapital",
     description:
       "Join the future of finance with our trusted crypto trading and mining investment platform.",
     images: ["/apple-touch-icon.png"],

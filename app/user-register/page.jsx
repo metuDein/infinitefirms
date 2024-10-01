@@ -6,9 +6,9 @@ import Register from "@component/authcomponents/Register";
 const page = async () => {
   const session = await getServerSession();
 
-  // if (session) {
-  //   redirect("/user/profile");
-  // }
+  if (session) {
+    redirect("/user/profile");
+  }
   return <Register />;
 };
 export default page;

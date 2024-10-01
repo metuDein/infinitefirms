@@ -24,7 +24,7 @@ const MiningDash = () => {
     xrpRate,
     zecRate,
   } = useDataContext();
-  const { balances } = currentUser;
+  // const { balances } = currentUser;
   // const [btcRate, setBtcRate] = useState(null);
   // const [ethRate, setEthRate] = useState(null);
   // const [ltcRate, setLtcRate] = useState(null);
@@ -33,7 +33,7 @@ const MiningDash = () => {
   // const [zecRate, setZecRate] = useState(null);
 
   const mySubs = allSubscription.filter(
-    (item) => item?.userId === currentUser?._id
+    (item) => item?.userId?._id === currentUser?._id
   );
 
   const activeSubs = mySubs.filter(
@@ -108,45 +108,63 @@ const MiningDash = () => {
       <div className="flex flex-wrap justify-center gap-2 items-center h-full mt-10">
         <MiningCard
           icon={<IconCurrencyBitcoin className="text-neutral-100 mb-5" />}
-          cryptoValue={(balances?.bitcoin).toFixed(4)}
+          cryptoValue={(currentUser?.balances?.bitcoin).toFixed(4)}
           chartSymbol={"BITSTAMP:BTCUSD"}
           symbol="BTC"
-          cashValue={handleCalculateUsdPrice(btcRate, balances?.bitcoin)}
+          cashValue={handleCalculateUsdPrice(
+            btcRate,
+            currentUser?.balances?.bitcoin
+          )}
         />
         <MiningCard
           icon={<IconCurrencyEthereum className="text-neutral-100 mb-5" />}
-          cryptoValue={(balances?.ethereum).toFixed(5)}
+          cryptoValue={(currentUser?.balances?.ethereum).toFixed(5)}
           chartSymbol={"COINBASE:ETHUSD"}
           symbol="ETH"
-          cashValue={handleCalculateUsdPrice(ethRate, balances?.ethereum)}
+          cashValue={handleCalculateUsdPrice(
+            ethRate,
+            currentUser?.balances?.ethereum
+          )}
         />
         <MiningCard
           icon={<IconCurrencyLitecoin className="text-neutral-100 mb-5" />}
-          cryptoValue={(balances?.litecoin).toFixed(2)}
+          cryptoValue={(currentUser?.balances?.litecoin).toFixed(2)}
           chartSymbol={"BINANCE:LTCUSD.P"}
           symbol="LTC"
-          cashValue={handleCalculateUsdPrice(ltcRate, balances?.litecoin)}
+          cashValue={handleCalculateUsdPrice(
+            ltcRate,
+            currentUser?.balances?.litecoin
+          )}
         />
         <MiningCard
           icon={<IconCurrencyMonero className="text-neutral-100 mb-5" />}
-          cryptoValue={(balances?.monero).toFixed(3)}
+          cryptoValue={(currentUser?.balances?.monero).toFixed(3)}
           chartSymbol={"KRAKEN:XMRUSD"}
           symbol="XMR"
-          cashValue={handleCalculateUsdPrice(xmrRate, balances?.monero)}
+          cashValue={handleCalculateUsdPrice(
+            xmrRate,
+            currentUser?.balances?.monero
+          )}
         />
         <MiningCard
           icon={<IconCurrencyXrp className="text-neutral-100 mb-5" />}
-          cryptoValue={(balances?.ripple).toFixed(3)}
+          cryptoValue={(currentUser?.balances?.ripple).toFixed(3)}
           chartSymbol={"BITSTAMP:XRPUSD"}
           symbol="XRP"
-          cashValue={handleCalculateUsdPrice(xrpRate, balances?.ripple)}
+          cashValue={handleCalculateUsdPrice(
+            xrpRate,
+            currentUser?.balances?.ripple
+          )}
         />
         <MiningCard
           icon={<IconBrandZulip className="text-neutral-100 mb-5" />}
-          cryptoValue={(balances?.zcash).toFixed(3)}
+          cryptoValue={(currentUser?.balances?.zcash).toFixed(3)}
           chartSymbol={"COINBASE:ZECUSD"}
           symbol="ZEC"
-          cashValue={handleCalculateUsdPrice(zecRate, balances?.zcash)}
+          cashValue={handleCalculateUsdPrice(
+            zecRate,
+            currentUser?.balances?.zcash
+          )}
         />
       </div>
       <div
@@ -158,44 +176,40 @@ const MiningDash = () => {
           {" "}
           Active Mining Subscriptions{" "}
         </h2>
-        {activeSubs &&
-          activeSubs.map((item, i) => (
-            <div
-              className="max-w-md mx-auto text-white rounded-lg shadow-lg p-6 bg-cover bg-center"
-              style={{
-                backgroundImage:
-                  "url(https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGUwY3o3OHZlNWFheHJqZ3JiMjQzdzAyNmZ0ZzB2d2l6eW03enEyNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/godMk62fXqpgY/200.webp)",
-                marginTop: "20px",
-              }}
-            >
-              <div className=" p-4 rounded-lg" key={i}>
-                <h2 className="text-xl font-semibold mb-4 text-center">
-                  Mining Information
-                </h2>
-                <div className="flex justify-between items-center mb-4">
-                  <span className="font-medium text-gray-300">
-                    Cryptocurrency:
-                  </span>
-                  <span className="text-lg font-bold">
-                    {" "}
-                    {item?.instruments}
-                  </span>
-                </div>
-                <div className="flex justify-between items-center mb-4">
-                  <span className="font-medium text-gray-300">
-                    Daily Earnings:
-                  </span>
-                  <span className="text-lg font-bold">
-                    {(item?.earning).toFixed(5)}
-                  </span>
-                </div>
-                <div className="flex justify-between items-center mb-4">
-                  <span className="font-medium text-gray-300">TH/s Rate:</span>
-                  <span className="text-lg font-bold">{item?.price}</span>
-                </div>
+        {activeSubs.map((item, i) => (
+          <div
+            className="max-w-md mx-auto text-white rounded-lg shadow-lg p-6 bg-cover bg-center"
+            style={{
+              backgroundImage:
+                "url(https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGUwY3o3OHZlNWFheHJqZ3JiMjQzdzAyNmZ0ZzB2d2l6eW03enEyNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/godMk62fXqpgY/200.webp)",
+              marginTop: "20px",
+            }}
+          >
+            <div className=" p-4 rounded-lg" key={i}>
+              <h2 className="text-xl font-semibold mb-4 text-center">
+                Mining Information
+              </h2>
+              <div className="flex justify-between items-center mb-4">
+                <span className="font-medium text-gray-300">
+                  Cryptocurrency:
+                </span>
+                <span className="text-lg font-bold"> {item?.instruments}</span>
+              </div>
+              <div className="flex justify-between items-center mb-4">
+                <span className="font-medium text-gray-300">
+                  Daily Earnings:
+                </span>
+                <span className="text-lg font-bold">
+                  {(item?.earning).toFixed(5)}
+                </span>
+              </div>
+              <div className="flex justify-between items-center mb-4">
+                <span className="font-medium text-gray-300">TH/s Rate:</span>
+                <span className="text-lg font-bold">{item?.price}</span>
               </div>
             </div>
-          ))}
+          </div>
+        ))}
       </div>
     </section>
   );

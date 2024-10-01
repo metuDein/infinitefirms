@@ -130,7 +130,7 @@ const Navbar = () => {
                     color: "#497fc5",
                   }}
                 >
-                  Infintefirms
+                  Infinitefirms
                 </span>
               </Link>
             </div>
@@ -155,7 +155,6 @@ const Navbar = () => {
                     <Image
                       src={currentUser?.image?.secure_url || ""}
                       width={60}
-                      alt="profilepic"
                       height={60}
                       style={{
                         borderRadius: "50%",
@@ -177,7 +176,7 @@ const Navbar = () => {
                   <div>
                     <Image
                       src={currentUser?.image?.secure_url || ""}
-                      alt="profilepic"
+                      alt="user icon"
                       width={60}
                       height={60}
                       style={{

@@ -1,11 +1,11 @@
 "use client";
-
-"use client";
 import { motion } from "framer-motion";
 import React from "react";
 import { ImagesSlider } from "@components/ui/images-slider";
+import { useRouter } from "next/navigation";
 
 const Welcome = () => {
+  const router = useRouter();
   const images = [
     "/assets/images/home2.jpg",
     "/assets/images/home1.jpg",
@@ -36,7 +36,10 @@ const Welcome = () => {
           Build a financial porfolio capitalizing on multiple assets under
           manangements of professionals
         </p>
-        <button className="px-4 py-2 backdrop-blur-sm border bg-emerald-300/10 border-emerald-500/20 text-white mx-auto text-center rounded-full relative mt-4">
+        <button
+          onClick={() => router.push("/user-register")}
+          className="px-4 py-2 backdrop-blur-sm border bg-emerald-300/10 border-emerald-500/20 text-white mx-auto text-center rounded-full relative mt-4"
+        >
           <span>Join now →</span>
           <div className="absolute inset-x-0  h-px -bottom-px bg-gradient-to-r w-3/4 mx-auto from-transparent via-emerald-500 to-transparent" />
         </button>

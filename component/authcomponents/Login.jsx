@@ -11,6 +11,8 @@ import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { toast } from "react-toastify";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // import { useSession } from "next-auth/react";
 
@@ -21,26 +23,32 @@ export function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     // const formData = new FormData(e.currentTarget);
-    const response = await signIn("credentials", {
-      email: email,
-      password: password,
-      redirect: false,
-    });
+    try {
+      setLoading(true);
+      const response = await signIn("credentials", {
+        email: email,
+        password: password,
+        redirect: false,
+      });
 
-    if (response.ok) {
-      await getUser();
-      setTimeout(() => {
-        router.push("/user/profile");
-        toast.success("Logged in successfully!");
-        router.refresh();
-      }, 2000);
+      if (response.ok) {
+        await getUser();
+        setTimeout(() => {
+          router.push("/user/profile");
+          toast.success("Logged in successfully!");
+          router.refresh();
+        }, 2000);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
     }
-
-    console.log({ response });
   };
   return (
     <section className="min-h-screen">
@@ -75,13 +83,28 @@ export function Login() {
             />
           </LabelInputContainer>
 
-          <button
-            className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
-            type="submit"
-          >
-            Sign in &rarr;
-            <BottomGradient />
-          </button>
+          {!loading && (
+            <button
+              className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
+              type="submit"
+            >
+              sign in &rarr;
+              <BottomGradient />
+            </button>
+          )}
+          {loading && (
+            <article
+              className=" text-center bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
+              type="submit"
+            >
+              <FontAwesomeIcon
+                icon={faSpinner}
+                spin
+                className="mx-auto text-center"
+              />
+              <BottomGradient />
+            </article>
+          )}
           <Link href={"/user-register"} className="text-gray-500 self-end">
             New User?{" "}
             <span className="underline font-bold text-black">

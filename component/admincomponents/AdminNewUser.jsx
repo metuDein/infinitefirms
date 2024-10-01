@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { Label } from "@components/ui/label";
 import { Input } from "@components/ui/input";
 import { cn } from "@/lib/utils";
@@ -19,12 +20,14 @@ const AdminNewUser = () => {
   const [password, setPassword] = useState("");
   const [selectedCountry, setSelectedCountry] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [loading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Form submitted");
 
     try {
+      setIsLoading(true);
       const response = await fetch("/api/auth/register", {
         method: "POST",
         body: JSON.stringify({
@@ -44,12 +47,18 @@ const AdminNewUser = () => {
         toast.success("user registered", {
           position: "top-center",
         });
+      } else {
+        toast.error(
+          "failed to create user, please change the credentials or change the email."
+        );
       }
     } catch (error) {
       console.error(error.response);
       toast.error(error.message, {
         position: "top-center",
       });
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
@@ -65,7 +74,7 @@ const AdminNewUser = () => {
         }}
       >
         <Image
-          src={"/assets/logo/horizon.png"}
+          src={"/assets/logo/logo.png"}
           alt="logo"
           width={80}
           height={80}
@@ -154,13 +163,28 @@ const AdminNewUser = () => {
           />
         </LabelInputContainer>
 
-        <button
-          className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
-          type="submit"
-        >
-          Add user &rarr;
-          <BottomGradient />
-        </button>
+        {!loading && (
+          <button
+            className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
+            type="submit"
+          >
+            Add user &rarr;
+            <BottomGradient />
+          </button>
+        )}
+        {loading && (
+          <article
+            className=" text-center bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
+            type="submit"
+          >
+            <FontAwesomeIcon
+              icon={faSpinner}
+              spin
+              className="mx-auto text-center"
+            />
+            <BottomGradient />
+          </article>
+        )}
 
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
       </form>
