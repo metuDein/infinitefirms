@@ -114,7 +114,7 @@ export function Login() {
               color: "#3182CE",
             }}
           >
-            dont't have an account?
+            don't have an account?
             <span className="underline font-bold text-indigo-400 ml-2">
               Register for one.
             </span>
