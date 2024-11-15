@@ -105,10 +105,18 @@ export function Login() {
               <BottomGradient />
             </article>
           )}
-          <Link href={"/user-register"} className="text-gray-500 self-end">
-            New User?{" "}
-            <span className="underline font-bold text-black">
-              Create and Account
+          
+          <Link
+            href={"/user-register"}
+            className="text-gray-400 float-right text-left w-full"
+            style={{
+              textDecoration: "underline",
+              color: "#3182CE",
+            }}
+          >
+            dont't have an account?
+            <span className="underline font-bold text-indigo-400 ml-2">
+              Register for one.
             </span>
           </Link>
           <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
