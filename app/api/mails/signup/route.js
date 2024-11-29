@@ -149,7 +149,7 @@ export async function POST(req) {
                                                             <table class="heading_block block-1" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
                                                                 <tr>
                                                                     <td class="pad">
-                                                                        <h1 style="margin: 0; color: #ffffff; direction: ltr; font-family: Tahoma, Verdana, Segoe, sans-serif; font-size: 35px; font-weight: 400; letter-spacing: normal; line-height: 120%; text-align: left; margin-top: 0; margin-bottom: 0; mso-line-height-alt: 42px;">Welcome to Horizonmarketcapital&nbsp;</h1>
+                                                                        <h1 style="margin: 0; color: #ffffff; direction: ltr; font-family: Tahoma, Verdana, Segoe, sans-serif; font-size: 35px; font-weight: 400; letter-spacing: normal; line-height: 120%; text-align: left; margin-top: 0; margin-bottom: 0; mso-line-height-alt: 42px;">Welcome to Infinitefirms&nbsp;</h1>
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -159,7 +159,7 @@ export async function POST(req) {
                                                                 <tr>
                                                                     <td class="pad" style="width:100%;padding-right:0px;padding-left:0px;">
                                                                         <div class="alignment" align="center" style="line-height:10px">
-                                                                            <div style="max-width: 78px;"><img src="https://ab33950319.imgdist.com/pub/bfra/vkm63t2z/yof/owo/9hn/horizon.png" style="display: block; height: auto; border: 0; width: 100%;" width="78" alt="Play Button in Speech Bubble Icon" title="Play Button in Speech Bubble Icon" height="auto"></div>
+                                                                            <div style="max-width: 78px;"><img src="https://www.infinitefirms.pro/_next/image?url=%2Fassets%2Flogo%2Flogo.png&w=64&q=75" style="display: block; height: auto; border: 0; width: 100%;" width="78" alt="Play Button in Speech Bubble Icon" title="Play Button in Speech Bubble Icon" height="auto"></div>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
@@ -184,7 +184,7 @@ export async function POST(req) {
                                                                 <tr>
                                                                     <td class="pad">
                                                                         <div style="color:#fff;direction:ltr;font-family:Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:19.2px;">
-                                                                            <p style="margin: 0;">We're thrilled to have you on board. At Horizonmarketcapital, we're committed to providing a secure, user-friendly, and rewarding platform to help you grow your wealth through smart investments.</p>
+                                                                            <p style="margin: 0;">We're thrilled to have you on board. At Infinitefirms, we're committed to providing a secure, user-friendly, and rewarding platform to help you grow your wealth through smart investments.</p>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
@@ -269,11 +269,11 @@ export async function POST(req) {
                                                                 <tr>
                                                                     <td class="pad">
                                                                         <div class="alignment" align="center"><!--[if mso]>
-        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://www.horizonmarketcapital.com/user-login" style="height:42px;width:95px;v-text-anchor:middle;" arcsize="10%" stroke="false" fillcolor="#7747FF">
+        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://www.Infinitefirms.pro/user-login" style="height:42px;width:95px;v-text-anchor:middle;" arcsize="10%" stroke="false" fillcolor="#7747FF">
         <w:anchorlock/>
         <v:textbox inset="0px,0px,0px,0px">
         <center dir="false" style="color:#ffffff;font-family:Tahoma, sans-serif;font-size:16px">
-        <![endif]--><a href="https://www.horizonmarketcapital.com/user-login" target="_blank" style="background-color:#7747FF;border-bottom:0px solid transparent;border-left:0px solid transparent;border-radius:4px;border-right:0px solid transparent;border-top:0px solid transparent;color:#ffffff;display:inline-block;font-family:Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif;font-size:16px;font-weight:400;mso-border-alt:none;padding-bottom:5px;padding-top:5px;text-align:center;text-decoration:none;width:auto;word-break:keep-all;"><span style="word-break: break-word; padding-left: 20px; padding-right: 20px; font-size: 16px; display: inline-block; letter-spacing: normal;"><span style="word-break: break-word; line-height: 32px;">Sign in</span></span></a><!--[if mso]></center></v:textbox></v:roundrect><![endif]--></div>
+        <![endif]--><a href="https://www.Infinitefirms.pro/user-login" target="_blank" style="background-color:#7747FF;border-bottom:0px solid transparent;border-left:0px solid transparent;border-radius:4px;border-right:0px solid transparent;border-top:0px solid transparent;color:#ffffff;display:inline-block;font-family:Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif;font-size:16px;font-weight:400;mso-border-alt:none;padding-bottom:5px;padding-top:5px;text-align:center;text-decoration:none;width:auto;word-break:keep-all;"><span style="word-break: break-word; padding-left: 20px; padding-right: 20px; font-size: 16px; display: inline-block; letter-spacing: normal;"><span style="word-break: break-word; line-height: 32px;">Sign in</span></span></a><!--[if mso]></center></v:textbox></v:roundrect><![endif]--></div>
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -314,7 +314,7 @@ export async function POST(req) {
                                                                 <tr>
                                                                     <td class="pad" style="width:100%;padding-right:0px;padding-left:0px;">
                                                                         <div class="alignment" align="center" style="line-height:10px">
-                                                                            <div style="max-width: 146.25px;"><img src="https://ab33950319.imgdist.com/pub/bfra/vkm63t2z/yof/owo/9hn/horizon.png" style="display: block; height: auto; border: 0; width: 100%;" width="146.25" alt="Your Logo" title="Your Logo" height="auto"></div>
+                                                                            <div style="max-width: 146.25px;"><img src="https://www.infinitefirms.pro/_next/image?url=%2Fassets%2Flogo%2Flogo.png&w=64&q=75" style="display: block; height: auto; border: 0; width: 100%;" width="146.25" alt="Your Logo" title="Your Logo" height="auto"></div>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
@@ -324,7 +324,7 @@ export async function POST(req) {
                                                                     <td class="pad">
                                                                         <div style="font-family: sans-serif">
                                                                             <div class style="font-size: 12px; font-family: Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; mso-line-height-alt: 18px; color: #ffffff; line-height: 1.5;">
-                                                                                <p style="margin: 0; text-align: center; font-size: 14px; mso-line-height-alt: 21px;">Once again, welcome to the <strong>Horizonmarketcapital</strong> community! Together, we'll work towards your financial success.</p>
+                                                                                <p style="margin: 0; text-align: center; font-size: 14px; mso-line-height-alt: 21px;">Once again, welcome to the <strong>Infinitefirms</strong> community! Together, we'll work towards your financial success.</p>
                                                                             </div>
                                                                         </div>
                                                                     </td>
@@ -335,7 +335,7 @@ export async function POST(req) {
                                                                     <td class="pad">
                                                                         <div style="font-family: sans-serif">
                                                                             <div class style="font-size: 12px; font-family: Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; mso-line-height-alt: 18px; color: #ffffff; line-height: 1.5;">
-                                                                                <p style="margin: 0; text-align: center; font-size: 14px; mso-line-height-alt: 21px;">The Horizonmarketcapital Team.</p>
+                                                                                <p style="margin: 0; text-align: center; font-size: 14px; mso-line-height-alt: 21px;">The Infinitefirms Team.</p>
                                                                             </div>
                                                                         </div>
                                                                     </td>
@@ -399,9 +399,9 @@ export async function POST(req) {
 
         // Email content
         const mailOptions = {
-            from: '"Horizonmarketcapital" <info@horizonmarketcapital.com>', // sender address
+            from: '"Infinitefirms" <info@Infinitefirms.com>', // sender address
             to: email, // list of receivers
-            subject: `Welcome to Our Horizonmarketcapital`, // Subject line
+            subject: `Welcome to Our Infinitefirms`, // Subject line
             html: registerationemail, // HTML body
         };
 

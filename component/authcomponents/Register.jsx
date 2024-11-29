@@ -86,7 +86,7 @@ export function Register() {
         />
       </div>
       <p className="text-neutral-600 text-center font-semibold max-w-sm mt-2 dark:text-neutral-300">
-        Sign up for an Horizonmarketcapital account
+        Sign up for an Infinitefirms account
       </p>
       <form className="my-8" onSubmit={handleSubmit}>
         <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">

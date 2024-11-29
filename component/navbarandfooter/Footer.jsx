@@ -86,23 +86,7 @@ const Footer = () => {
             </p>
           </div>
 
-          <div>
-            {/* <p
-              style={{
-                maxWidth: "250px",
-                padding: "4px",
-              }}
-            >
-              All materials and services provided on this Horizonmarketcapital
-              are subject to copyright and belong to "Horizon Market capital".
-              <br />
-              In case of violation, they will be prosecuted in accordance with
-              legislation of the intellectual property protection. Prime
-              Exchange Rate is regulated by CySEC with registration number 44699
-              IBB 0014. All activities on this website is provided by Prime
-              Exchange Rate.
-            </p> */}
-          </div>
+          <div></div>
         </div>
         <hr />
         <div

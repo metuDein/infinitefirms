@@ -92,8 +92,7 @@ const TermsAndConditions = () => {
         </section>
 
         <p className="text-center text-gray-500 text-sm mt-10">
-          &copy; {new Date().getFullYear()} Horizonmarketcapital. All Rights
-          Reserved.
+          &copy; {new Date().getFullYear()} Infinitefirms. All Rights Reserved.
         </p>
       </div>
     </div>
