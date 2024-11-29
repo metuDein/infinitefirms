@@ -200,7 +200,7 @@ const MiningDash = () => {
                   Daily Earnings:
                 </span>
                 <span className="text-lg font-bold">
-                  {(item?.earning).toFixed(5)}
+                  {(item?.earning || 0.4122).toFixed(5)}
                 </span>
               </div>
               <div className="flex justify-between items-center mb-4">
