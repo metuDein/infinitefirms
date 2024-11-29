@@ -53,7 +53,7 @@ const Footer = () => {
               <a href="#">Email: info@infinitefirms.com</a>
             </p>
             <p>
-              <a href="#">Address: 3560 JFK Blvd, Jersey city, NJ, 07304</a>
+              <a href="#">Address: 30 JFK Blvd, Jersey city, NJ, 07304</a>
             </p>
           </div>
           <div>
