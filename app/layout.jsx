@@ -71,6 +71,10 @@ const RootLayout = async ({ children }) => {
             </main>
             <Footer />
             <ToastContainer />
+            <script
+              src="//code.tidio.co/xykak03lww9rdp82h5khxjq1amyoybek.js"
+              async
+            ></script>
           </body>
         </html>
       </DataProvider>
