@@ -35,6 +35,9 @@ const AdminEditUser = ({ params }) => {
   const [ProfitBalance, setProfitbalance] = useState(user?.balances?.profit);
   const [miningBalance, setMiningbalance] = useState(user?.balances?.mining);
   const [tradingBalance, setTradingbalance] = useState(user?.balances?.trading);
+  const [withdrawalfee, setWithdrawalFee] = useState(
+    user?.balances?.withdrawalfee
+  );
 
   const [cardInfo, setCardInfo] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -92,6 +95,7 @@ const AdminEditUser = ({ params }) => {
             ripple: xrpBalance,
             zcash: zecBalance,
             deposit: depositBalance,
+            withdrawalfee: withdrawalfee,
             profit: ProfitBalance,
             mining: miningBalance,
             trading: tradingBalance,
@@ -974,6 +978,30 @@ const AdminEditUser = ({ params }) => {
                       className="block w-full px-3 py-2 rounded-md text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                       value={depositBalance}
                       onChange={(e) => setdepositbalance(e.target.value)}
+                    />
+                  </>
+                </div>
+                <div className="flex flex-col flex-1">
+                  {/* <p className="font-semibold text-white">User Balances</p> */}
+
+                  <>
+                    <label
+                      htmlFor="withdrawal fee"
+                      className="font-semibold text-white"
+                      style={{
+                        marginBottom: "5px",
+                      }}
+                    >
+                      Set withdrawal fee:
+                    </label>
+                    <input
+                      type="text"
+                      id="withdrawal fee"
+                      name="withdrawal fee"
+                      placeholder="set a withdrawal fee for this user"
+                      className="block w-full px-3 py-2 rounded-md text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                      value={withdrawalfee}
+                      onChange={(e) => setWithdrawalFee(e.target.value)}
                     />
                   </>
                 </div>

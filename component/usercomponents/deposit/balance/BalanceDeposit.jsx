@@ -199,7 +199,7 @@ const BalanceDeposit = () => {
             }}
             className="text-black font-semibold px-10 py-3 mb-5 bg-neutral-200 rounded mt-10 hover:bg-neutral-300 text-center"
           >
-            Purchase
+            Continue
           </button>
         </div>
         {/* <TradingViewMiniWidget symbol={chartSymbol} /> */}

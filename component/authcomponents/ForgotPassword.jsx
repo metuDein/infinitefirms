@@ -16,13 +16,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // import { useSession } from "next-auth/react";
 
-export function Login() {
+export function ForgotPassword() {
   const router = useRouter();
   // const session = await getServerSession();
   const { getUser } = useDataContext();
 
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -30,19 +29,43 @@ export function Login() {
     // const formData = new FormData(e.currentTarget);
     try {
       setLoading(true);
-      const response = await signIn("credentials", {
-        email: email,
-        password: password,
-        redirect: false,
+      const response = await fetch("/api/auth/forgotpassword", {
+        method: "POST",
+        body: JSON.stringify({
+          email: email,
+        }),
       });
 
+      const data = await response.json();
+
+      if (!response.ok) {
+        const errorData = JSON.parse(response.error); // Parse the JSON error message
+        if (errorData.code === 404) {
+          setErrorMsg(errorData.message);
+        } else if (errorData.code === 401) {
+          setErrorMsg("Incorrect password.");
+        } else if (errorData.code === 400) {
+          setErrorMsg("Username and password are required.");
+        } else {
+          setErrorMsg("An unknown error occurred.");
+        }
+        setTimeout(() => setErrorMsg(null), 3000);
+        return;
+      }
+
       if (response.ok) {
-        await getUser();
-        setTimeout(() => {
-          router.push("/user/profile");
-          toast.success("Logged in successfully!");
-          router.refresh();
-        }, 2000);
+        const res = await fetch("/api/mails/resetpassword", {
+          method: "POST",
+          body: JSON.stringify({
+            email: email,
+            url: data.resetUrl,
+          }),
+        });
+
+        if (res.ok) {
+          toast.success("reset link sent.");
+          return;
+        }
       }
     } catch (error) {
       toast.error(error.message);
@@ -54,10 +77,10 @@ export function Login() {
     <section className="min-h-screen">
       <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl  p-4 md:p-8 shadow-input bg-white dark:bg-black">
         <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
-          Welcome Back
+          Reset password
         </h2>
         <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">
-          Login to access your dashboard
+          Enter your email to receive a reset link
         </p>
         <form className="my-8" onSubmit={handleSubmit} autoComplete="false">
           <LabelInputContainer className="mb-4">
@@ -71,24 +94,13 @@ export function Login() {
               onChange={(e) => setEmail(e.target.value)}
             />
           </LabelInputContainer>
-          <LabelInputContainer className="mb-4">
-            <Label htmlFor="password">Password</Label>
-            <Input
-              id="password"
-              name="password"
-              placeholder="••••••••"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </LabelInputContainer>
 
           {!loading && (
             <button
               className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
               type="submit"
             >
-              sign in &rarr;
+              Continue &rarr;
               <BottomGradient />
             </button>
           )}
@@ -106,31 +118,6 @@ export function Login() {
             </article>
           )}
 
-          <div className="flex items-center justify-start">
-            <Link
-              href={"/user-register"}
-              className="text-gray-400 float-right text-left w-full"
-              style={{
-                textDecoration: "underline",
-                color: "#3182CE",
-              }}
-            >
-              don't have an account?
-              <span className="underline font-bold text-indigo-400 ml-2">
-                Sign Up
-              </span>
-            </Link>
-            <Link
-              href={"/forgot-password"}
-              className="text-gray-400 float-right text-left w-full"
-              style={{
-                textDecoration: "underline",
-                color: "#3182CE",
-              }}
-            >
-              forgot password?
-            </Link>
-          </div>
           <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
         </form>
       </div>
@@ -155,4 +142,4 @@ const LabelInputContainer = ({ children, className }) => {
   );
 };
 
-export default Login;
+export default ForgotPassword;

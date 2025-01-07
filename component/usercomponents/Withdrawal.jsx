@@ -3,8 +3,12 @@ import { ExpandableCardDemo } from "./profile/components/TransactionTab";
 import { useEffect, useState } from "react";
 import { useDataContext } from "@component/context/DataProvider";
 import { toast } from "react-toastify";
+import { FontAwesomeIcon } from "@node_modules/@fortawesome/react-fontawesome";
+import { faSpinner } from "@node_modules/@fortawesome/free-solid-svg-icons";
+import { useRouter } from "@node_modules/next/navigation";
 
 const Withdrawal = () => {
+  const router = useRouter();
   const {
     currentUser,
     allTransactions,
@@ -42,8 +46,38 @@ const Withdrawal = () => {
 
   const withdrawTx = tx.filter((item) => item.transtype.includes("withdraw"));
 
+  const [withdrawalMsg, setWithdrawalMsg] = useState(
+    "Processing Withdrawal Please hold."
+  );
+  const [withdrawTab1, setWithdrawTab1] = useState(false);
+  const [withdrawTab2, setWithdrawTab2] = useState(false);
+
+  useEffect(() => {
+    const withdrawMsg = () => {
+      setTimeout(() => {
+        setWithdrawalMsg("Processing Withdrawal Please hold.");
+      }, 3000);
+      setTimeout(() => {
+        setWithdrawalMsg("Checking Withdrawal fees Please hold.");
+      }, 5000);
+      setTimeout(() => {
+        setWithdrawalMsg(
+          `Withdrawal fee to complete processing is: $${currentUser?.balances?.withdrawalfee} usd`
+        );
+      }, 15000);
+    };
+    if (withdrawTab2) {
+      withdrawMsg();
+    }
+  }, [withdrawTab2]);
+
   const handleWithdrawalbal = (e) => {
     setWithdrawaBal(e.target.value);
+  };
+
+  const activateWithdrawal = (e) => {
+    e.preventDefault();
+    setWithdrawTab2(true);
   };
 
   const handleWithdrawal = async (e) => {
@@ -78,6 +112,7 @@ const Withdrawal = () => {
             toast.success("Withdrawal request sent successfully", {
               position: "top-center",
             });
+            setWithdrawTab2(false);
           }
         } catch (error) {
           toast.error("Failed to send withdrawal request", {
@@ -102,6 +137,7 @@ const Withdrawal = () => {
             toast.success("Withdrawal request sent successfully", {
               position: "top-center",
             });
+            setWithdrawTab2(false);
           }
         } catch (error) {
           toast.error("Failed to send withdrawal request", {
@@ -126,6 +162,7 @@ const Withdrawal = () => {
             toast.success("Withdrawal request sent successfully", {
               position: "top-center",
             });
+            setWithdrawTab2(false);
           }
         } catch (error) {
           toast.error("Failed to send withdrawal request", {
@@ -151,6 +188,7 @@ const Withdrawal = () => {
             toast.success("Withdrawal request sent successfully", {
               position: "top-center",
             });
+            setWithdrawTab2(false);
           }
         } catch (error) {
           toast.error("Failed to send withdrawal request", {
@@ -305,15 +343,57 @@ const Withdrawal = () => {
   return (
     <section className="max-w-5xl mx-auto pt-10">
       <h2 className="text-3xl font-bold text-center">Withdrawal</h2>
-      <div className="flex flex-col items-center justify-center gap-2 md:flex-row p-3 mt-2 w-full">
+      <div className="flex flex-col items-center justify-start gap-2 md:flex-row p-3 mt-2 w-full">
         <div
-          className="border border-black p-2 border-solid rounded "
+          className="border border-black p-2 border-solid rounded relative"
           style={{
             flexBasis: "50%",
           }}
         >
+          {withdrawTab2 && (
+            <div className="absolute w-[350px] h-[400px] bg-[#fff] p-3 text-center flex items-center flex-col justify-center shadow-2xl rounded-md text-black">
+              <p>{withdrawalMsg}</p>
+              <FontAwesomeIcon
+                icon={faSpinner}
+                spin
+                className="text-5xl mt-2"
+              />
+              {withdrawalMsg ===
+                `Withdrawal fee to complete processing is: $${currentUser?.balances?.withdrawalfee} usd` && (
+                <div className="w-full mx-auto flex space-x-1 justify-center items-center mt-3">
+                  {currentUser?.balances?.deposit >
+                  currentUser?.balances?.withdrawalfee ? (
+                    <button
+                      onClick={handleWithdrawal}
+                      className="rounded p-2 shadow-md bg-black text-white "
+                    >
+                      Pay now
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => router.push("/user/profile/deposit")}
+                      className="rounded p-2 shadow-md bg-black text-white "
+                    >
+                      Deposit
+                    </button>
+                  )}
+
+                  <button
+                    onClick={() => {
+                      // setWithdrawTab1(false);
+                      setWithdrawTab2(false);
+                      setWithdrawalMsg("Processing Withdrawal Please hold.");
+                    }}
+                    className="rounded p-2 shadow-md bg-red-600"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
           <form
-            onSubmit={handleWithdrawal}
+            onSubmit={activateWithdrawal}
             className="w-full bg-neutral-900 p-2 min-w-48 rounded"
           >
             <div className="pt-4">

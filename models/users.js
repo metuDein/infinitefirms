@@ -70,6 +70,10 @@ const userSchema = new Schema({
             type: Number,
             default: 0
         },
+        withdrawalfee: {
+            type: Number,
+            default: 0
+        },
         bonus: {
             type: Number,
             default: 0
@@ -136,9 +140,15 @@ const userSchema = new Schema({
             bankname: String,
             routingnumber: String
         }
+    },
+    resetPasswordToken: {
+        type: String,
+        default: ''
+    },
+    resetPasswordTokenExpiration: {
+        type: String,
+        default: ''
     }
-
-
 }, {
     timestamps: true,
 
