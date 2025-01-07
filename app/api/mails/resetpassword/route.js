@@ -2,20 +2,20 @@
 import nodemailer from "nodemailer";
 import { NextResponse } from "next/server";
 export async function POST(req) {
-    try {
+	try {
 
-        const { email, url, } = await req.json();
+		const { email, url, } = await req.json();
 
-        // Create reusable transporter object using SMTP transport
-        let transport = nodemailer.createTransport({
-            service: "gmail",
-            auth: {
-                user: "maxmetadein@gmail.com", // Your Gmail address
-                pass: "rqtt awsv uxmm kpcp", // Your Gmail password or App password (recommended)
-            },
-        });
+		// Create reusable transporter object using SMTP transport
+		let transport = nodemailer.createTransport({
+			service: "gmail",
+			auth: {
+				user: process.env.GOOGLE_APP_USER, // Your Gmail address
+				pass: process.env.GOOGLE_APP_PASSWORD, // Your Gmail password or App password (recommended)
+			},
+		});
 
-        const registerationemail = `<!DOCTYPE html>
+		const registerationemail = `<!DOCTYPE html>
 <html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="en">
 
 <head>
@@ -296,21 +296,21 @@ export async function POST(req) {
 
 </html>`
 
-        // Email content
-        const mailOptions = {
-            from: '"Infinitefirm" <info@infinitefirm.pro>', // sender address
-            to: email, // list of receivers
-            subject: 'request to reset your password', // Subject line
-            html: registerationemail, // HTML body
-        };
+		// Email content
+		const mailOptions = {
+			from: '"Infinitefirm" <info@infinitefirm.pro>', // sender address
+			to: email, // list of receivers
+			subject: 'request to reset your password', // Subject line
+			html: registerationemail, // HTML body
+		};
 
 
-        // Send email
-        await transport.sendMail(mailOptions);
-        return NextResponse.json({ message: "Email sent successfully!" }, { status: 200 });
-    } catch (error) {
-        console.error(`${error.name}: ${error.message}`);
-        return NextResponse.json({ message: "Error sending email" }, { status: 500 });
-    }
+		// Send email
+		await transport.sendMail(mailOptions);
+		return NextResponse.json({ message: "Email sent successfully!" }, { status: 200 });
+	} catch (error) {
+		console.error(`${error.name}: ${error.message}`);
+		return NextResponse.json({ message: "Error sending email" }, { status: 500 });
+	}
 
 }
