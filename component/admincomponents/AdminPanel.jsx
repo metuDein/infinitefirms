@@ -12,7 +12,7 @@ import {
 import { useDataContext } from "@component/context/DataProvider";
 import { ExpandableCardDemo } from "./components/TransactionsTab";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCommentMedical,
@@ -26,7 +26,7 @@ import Link from "next/link";
 
 const AdminPanel = () => {
   const router = useRouter();
-  const { allTransactions, allUsers, allTraders, allSubscription, kycs } =
+  const { allTransactions, allUsers, allTraders, allSubscription, kycs, appData } =
     useDataContext();
   const [activeTab, setActiveTab] = useState(0);
 
@@ -34,6 +34,13 @@ const AdminPanel = () => {
     setActiveTab(index);
   };
 
+  useEffect(() => {
+      const fetchData = async () => {
+        await appData()
+      }
+
+      fetchData()
+  }, [])
   const TabsDemo = () => {
     const tabs = [
       {

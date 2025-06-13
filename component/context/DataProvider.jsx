@@ -146,6 +146,7 @@ export const DataProvider = ({ children }) => {
         allTraders,
         allCopiers,
         allSubscription,
+        appData,
         kycs,
         btcRate,
         ethRate,

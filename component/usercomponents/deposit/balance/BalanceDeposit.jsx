@@ -51,6 +51,11 @@ const BalanceDeposit = () => {
     setConfirm("usdt payment");
     setSelectedAddress(wallets.usdt.address);
   };
+  const cardPayment = () => {
+    setConfirm("card payment");
+  };
+
+
   const handleCalculate = (amount) => {
     if (btcRate && amount) {
       return (amount / btcRate).toFixed(7);
@@ -285,6 +290,51 @@ const BalanceDeposit = () => {
       </div>
     );
   };
+  const CardPaymentTab = ({  amount, address, coinName }) => {
+    return (
+      <form>
+      <div className="max-w-5xl flex items-center justify-center">
+        <div
+          className="flex flex-col mx-auto max-w-xl"
+          style={{
+            padding: "0, 20px, 0",
+          }}
+        >
+          <p className="font-semibold text-xl text-center">
+            You are about to pay ${amount}USD
+          </p>
+          <p className="py-2 text-sm text-center text-gray/70">enter your card details</p>
+          {/* <CountdownTimer /> */}
+          <div className="mx-auto p-2">
+          </div>
+          <div className="flex flex-col">
+          
+            <div>
+              <label htmlFor="cardnumber">
+              <input type="text" name="cardnumber" id="cardnumber" className="text-[14px] p-2 rounded w-[300px] border border-solid border-gray focus:outline-none" placeholder="enter card number"  />
+              </label>
+            </div>
+            <button
+              style={{
+                padding: "10px",
+                margin: "10px 0",
+                backgroundColor: "#008000",
+                color: "#fff",
+                fontSize: "18px",
+                fontWeight: "bold",
+                cursor: "pointer",
+                borderRadius: "5px",
+              }}
+              onClick={() => setConfirm("confirm payment")}
+            >
+              continue payment
+            </button>
+          </div>
+        </div>
+      </div>
+      </form>
+    );
+  };
   const uploadImage = async (e) => {
     const files = e.target.files;
     const data = new FormData();
@@ -351,6 +401,15 @@ const BalanceDeposit = () => {
                   USDT
                 </p>
               </div>
+              <div
+                onClick={() => cardPayment()}
+                className="p-2 border rounded border-gray-200 bg-black w-[150px] min-h-[400px] pt-10 pb-10 cursor-pointer"
+              >
+                <IconBrandTether className="text-xl text-white mx-auto w-[200px] " />
+                <p className="text-xl font-semibold text-center text-white">
+                  Card Payment
+                </p>
+              </div>
             </div>
           </>
         );
@@ -372,6 +431,15 @@ const BalanceDeposit = () => {
               src={wallets.usdt.src}
               amount={txAmount}
               coinName={"USDT"}
+            />
+          </div>
+        );
+      case "card payment":
+        return (
+          <div className="pt-10">
+            <CardPaymentTab
+              amount={txAmount}
+              coinName={"USD"}
             />
           </div>
         );
