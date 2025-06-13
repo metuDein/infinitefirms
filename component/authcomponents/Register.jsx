@@ -52,7 +52,7 @@ export function Register() {
           }),
         });
 
-        toast.success("user registered", {
+        toast.success("Your account was successfully created. (check your email and spam folder)", {
           position: "top-center",
         });
       }

@@ -25,7 +25,7 @@ const ContactUs = () => {
         }),
       });
       if (response.ok) {
-        toast.success("Email sent successfully!");
+        toast.success("Email sent successfully! We will get back to you soon. (check your email or spam folder for a reply.)", );
       }
     } catch (error) {
       console.error("Error sending email:", error);
@@ -41,6 +41,20 @@ const ContactUs = () => {
 
       <form onSubmit={handleSendEmail}>
         <div className="mb-4">
+          <label className="block text-gray-700 mb-2" htmlFor="email">
+            Email Address
+          </label>
+          <input
+            id="email"
+            type="text"
+            className="w-full p-2 border border-gray-300 rounded-md"
+            value={subject}
+            onChange={(e) => setSubject(e.target.value)}
+            required
+            placeholder="Enter your email address"
+          />
+        </div>
+        <div className="mb-4">
           <label className="block text-gray-700 mb-2" htmlFor="subject">
             Email Subject
           </label>
@@ -51,6 +65,7 @@ const ContactUs = () => {
             value={subject}
             onChange={(e) => setSubject(e.target.value)}
             required
+            placeholder="Enter email subject"
           />
         </div>
         <div className="mb-4">
@@ -64,6 +79,7 @@ const ContactUs = () => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
+            placeholder="Enter email title"
           />
         </div>
 
@@ -78,6 +94,7 @@ const ContactUs = () => {
             value={body}
             onChange={(e) => setBody(e.target.value)}
             required
+            placeholder="Enter your message here"
           ></textarea>
         </div>
 
