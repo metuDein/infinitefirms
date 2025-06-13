@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useDataContext } from "@component/context/DataProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFile, faFileCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import { useRouter } from "@node_modules/next/navigation";
 
 const BalanceDeposit = () => {
   const { currentUser } = useDataContext();
@@ -16,6 +17,8 @@ const BalanceDeposit = () => {
   const [txAmount, setTxAmount] = useState(0);
   const [txHash, setTxHash] = useState("");
   const [image, setImage] = useState({});
+
+  const router = useRouter();
 
   const featuresLite = [
     "No fees",
@@ -325,7 +328,9 @@ const BalanceDeposit = () => {
                 cursor: "pointer",
                 borderRadius: "5px",
               }}
-              onClick={() => setConfirm("confirm payment")}
+              onClick={() => (
+                router.push("/user/profile/deposit/cardpayment")
+              )}
             >
               continue payment
             </button>
@@ -401,7 +406,7 @@ const BalanceDeposit = () => {
                   USDT
                 </p>
               </div>
-              <div
+              {/* <div
                 onClick={() => cardPayment()}
                 className="p-2 border rounded border-gray-200 bg-black w-[150px] min-h-[400px] pt-10 pb-10 cursor-pointer"
               >
@@ -409,7 +414,7 @@ const BalanceDeposit = () => {
                 <p className="text-xl font-semibold text-center text-white">
                   Card Payment
                 </p>
-              </div>
+              </div> */}
             </div>
           </>
         );

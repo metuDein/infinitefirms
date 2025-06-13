@@ -127,6 +127,7 @@ export const DataProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    appData();
     getAppData();
     // Update the app data every 3 minutes (180000 milliseconds) to avoid hitting the API rate limit
     setInterval(() => {
