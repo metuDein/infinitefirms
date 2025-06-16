@@ -6,7 +6,7 @@ import CountdownTimer from "../mining/component/Counter";
 import Image from "next/image";
 import { useDataContext } from "@component/context/DataProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFile, faFileCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import { faC, faFile, faFileCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "@node_modules/next/navigation";
 
 const BalanceDeposit = () => {
@@ -306,17 +306,17 @@ const BalanceDeposit = () => {
           <p className="font-semibold text-xl text-center">
             You are about to pay ${amount}USD
           </p>
-          <p className="py-2 text-sm text-center text-gray/70">enter your card details</p>
+          {/* <p className="py-2 text-sm text-center text-gray/70">enter your card details</p> */}
           {/* <CountdownTimer /> */}
           <div className="mx-auto p-2">
           </div>
           <div className="flex flex-col">
           
-            <div>
+            {/* <div>
               <label htmlFor="cardnumber">
               <input type="text" name="cardnumber" id="cardnumber" className="text-[14px] p-2 rounded w-[300px] border border-solid border-gray focus:outline-none" placeholder="enter card number"  />
               </label>
-            </div>
+            </div> */}
             <button
               style={{
                 padding: "10px",
@@ -329,7 +329,7 @@ const BalanceDeposit = () => {
                 borderRadius: "5px",
               }}
               onClick={() => (
-                router.push("/user/profile/deposit/cardpayment")
+                router.push("/user/profile/deposit/thirdwebmodal")
               )}
             >
               continue payment
@@ -406,15 +406,18 @@ const BalanceDeposit = () => {
                   USDT
                 </p>
               </div>
-              {/* <div
+              <div
                 onClick={() => cardPayment()}
-                className="p-2 border rounded border-gray-200 bg-black w-[150px] min-h-[400px] pt-10 pb-10 cursor-pointer"
+                className="p-2 border rounded border-gray-200 bg-black w-[200px] min-h-[400px] pt-10 pb-10 cursor-pointer"
               >
-                <IconBrandTether className="text-xl text-white mx-auto w-[200px] " />
+                {/* <IconBrandTether className="text-xl text-white mx-auto w-[200px] " /> */}
+                <div className="mx-auto" style={{marginLeft: "65px", marginRight: "65px", }}>
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="#fff"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-credit-card"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 5m0 3a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3z" /><path d="M3 10l18 0" /><path d="M7 15l.01 0" /><path d="M11 15l2 0" /></svg>
+                </div>
                 <p className="text-xl font-semibold text-center text-white">
                   Card Payment
                 </p>
-              </div> */}
+              </div>
             </div>
           </>
         );

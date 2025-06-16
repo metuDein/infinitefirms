@@ -12,6 +12,7 @@ import Link from "next/link";
 import { toast } from "react-toastify";
 import Image from "next/image";
 import CountrySelect from "./components/CountrySelect";
+import { useRouter } from "@node_modules/next/navigation";
 
 export function Register() {
   const [email, setEmail] = useState("");
@@ -22,6 +23,8 @@ export function Register() {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,6 +47,11 @@ export function Register() {
       const data = await response.json();
       console.log(data, response);
 
+      if(!response.ok) {
+        toast.error(data.message || "An error occurred while creating your account", {
+          position: "top-center",
+        });
+      }
       if (response.ok) {
         await fetch("/api/mails/signup", {
           method: "POST",
@@ -51,11 +59,12 @@ export function Register() {
             email,
           }),
         });
-
-        toast.success("Your account was successfully created. (check your email and spam folder)", {
+ toast.success("Your account was successfully created. (check your email and spam folder)", {
           position: "top-center",
         });
+        router.push("/user-login");
       }
+       
     } catch (error) {
       console.error(error.response);
       toast.error(error.message, {

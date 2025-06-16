@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { MultiStepLoader as Loader } from "@components/ui/multi-step-loader";
 import { IconSquareRoundedX } from "@tabler/icons-react";
 import { useState } from "react";
+// import LanguageSelector from "./LanguageSelector";
 import {
   IconPackageImport,
   IconSettings,
@@ -144,6 +145,7 @@ const Navbar = () => {
                 <Link href="/faq/contactus">Contact</Link>
                 <Link href="/user-register">Register</Link>
                 <Link href="/user-login">Login</Link>
+                {/* <LanguageSelector /> */}
               </div>
             )}
             {session && (
