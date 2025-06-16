@@ -45,10 +45,12 @@ export function Register() {
         }),
       });
       const data = await response.json();
-      console.log(data, response);
+      console.log(data);
 
       if(!response.ok) {
-        toast.error(data.message || "An error occurred while creating your account", {
+
+      
+        toast.error(data?.error || "An error occurred while creating your account", {
           position: "top-center",
         });
       }
@@ -59,15 +61,17 @@ export function Register() {
             email,
           }),
         });
- toast.success("Your account was successfully created. (check your email and spam folder)", {
+        toast.success("Your account was successfully created. (check your email and spam folder)", {
           position: "top-center",
         });
         router.push("/user-login");
       }
        
     } catch (error) {
-      console.error(error.response);
-      toast.error(error.message, {
+
+      console.log(error);
+      
+      toast.error(data.error, {
         position: "top-center",
       });
     } finally {
