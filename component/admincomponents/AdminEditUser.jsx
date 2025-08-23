@@ -32,6 +32,7 @@ const AdminEditUser = ({ params }) => {
   const [zecBalance, setZecbalance] = useState(user?.balances?.zcash);
 
   const [depositBalance, setdepositbalance] = useState(user?.balances?.deposit);
+  const [withdrawals, setWithdrawals] = useState(user?.balances?.withdrawals);
   const [ProfitBalance, setProfitbalance] = useState(user?.balances?.profit);
   const [miningBalance, setMiningbalance] = useState(user?.balances?.mining);
   const [tradingBalance, setTradingbalance] = useState(user?.balances?.trading);
@@ -95,6 +96,7 @@ const AdminEditUser = ({ params }) => {
             ripple: xrpBalance,
             zcash: zecBalance,
             deposit: depositBalance,
+            withdrawals: withdrawals,
             withdrawalfee: withdrawalfee,
             profit: ProfitBalance,
             mining: miningBalance,
@@ -978,6 +980,30 @@ const AdminEditUser = ({ params }) => {
                       className="block w-full px-3 py-2 rounded-md text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                       value={depositBalance}
                       onChange={(e) => setdepositbalance(e.target.value)}
+                    />
+                  </>
+                </div>
+                <div className="flex flex-col flex-1">
+                  {/* <p className="font-semibold text-white">User Balances</p> */}
+
+                  <>
+                    <label
+                      htmlFor="deposit"
+                      className="font-semibold text-white"
+                      style={{
+                        marginBottom: "5px",
+                      }}
+                    >
+                      Withdrawals:
+                    </label>
+                    <input
+                      type="text"
+                      id="deposit"
+                      name="deposit"
+                      placeholder="deposit"
+                      className="block w-full px-3 py-2 rounded-md text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                      value={withdrawals}
+                      onChange={(e) => setWithdrawals(e.target.value)}
                     />
                   </>
                 </div>

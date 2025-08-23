@@ -68,7 +68,9 @@ const Dashboard = () => {
         </div>
         <div className="col-span-4 lg:col-span-1 bg-gray-800 rounded-lg p-6 text-white">
           <h3 className="text-xl font-semibold">Withdrawals</h3>
-          <p className="text-3xl font-bold mt-4">$0.00</p>
+          <p className="text-3xl font-bold mt-4">
+            ${currentUser && currentUser?.balances?.withdrawals}
+          </p>
         </div>
         <div className="col-span-4 lg:col-span-1 bg-gray-800 rounded-lg p-6 text-white">
           <h3 className="text-xl font-semibold">Deposit Balance</h3>

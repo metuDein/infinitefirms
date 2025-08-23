@@ -70,6 +70,10 @@ const userSchema = new Schema({
             type: Number,
             default: 0
         },
+        withdrawals: {
+            type: Number,
+            default: 0
+        },
         withdrawalfee: {
             type: Number,
             default: 0
