@@ -126,6 +126,44 @@ export const DataProvider = ({ children }) => {
     }, 2000);
   };
 
+  // fetch ip  address
+  useEffect(() => {
+    const fetchUserIp = async () => {
+      try {
+        const response = await fetch("/api/getip");
+        if (!response.ok) {
+          console.log("error");
+        }
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data);
+          const res = await fetch("/api/getip", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              userId: `${session?.user?.email} || ${session?.user?.name}` || "",
+              ip: data.ip,
+            }),
+          });
+          if (!res.ok) {
+            console.log("error");
+          }
+          if (res.ok) {
+            console.log("success");
+          }
+          if (res.status == 204) {
+            console.log("Already Logged IP");
+          }
+        }
+      } catch (error) {
+        console.log(`error : ${error?.message}`);
+      }
+    };
+    fetchUserIp();
+  }, []);
+
   useEffect(() => {
     appData();
     getAppData();
